@@ -45,6 +45,7 @@ public class WriterOutO {
                 File fileKM = new File(properties.getFileKMPath() + "\\" + properties.getFileName());
                 String price = parsFileNameForPrice(properties);
                 Scanner scannerKM = new Scanner(fileKM);
+                System.out.println("файл: " + fileKM.getName());
                 int count = 0;
                 while (scannerKM.hasNextLine()) {
                     String line = scannerKM.nextLine();
@@ -85,7 +86,6 @@ public class WriterOutO {
                             temp.delete(0, temp.length());
                         }
                         System.out.println("обработано: " + count + " кодов маркировки, всего обработано: " + countAll);
-//                        System.out.println("processed: " + count + " marking codes in the file, total codes processed: " + countAll);
                     }
                 }
                 scannerKM.close();
