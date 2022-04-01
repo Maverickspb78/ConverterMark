@@ -1,7 +1,6 @@
 package com.andreev.writers;
 
 import com.andreev.properties.Properties;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -80,4 +79,6 @@ public class WriterVO {
         Date date = new Date();
         return format.format(date);
     }
+
 }
+

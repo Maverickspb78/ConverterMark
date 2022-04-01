@@ -19,6 +19,9 @@ public class Properties {
     private String dataPerDoc;
     private String dataOut;
 
+    public Properties() {
+    }
+
     public String getPathToWriteFile() {
         return pathToWriteFile;
     }
@@ -146,5 +149,4 @@ public class Properties {
     public void setDataOut(String dataOut) {
         this.dataOut = dataOut;
     }
-
 }

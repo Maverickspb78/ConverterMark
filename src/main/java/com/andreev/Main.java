@@ -4,7 +4,6 @@ import com.andreev.properties.Properties;
 import com.andreev.properties.ReaderProperties;
 import com.andreev.writers.WriterOutO;
 import com.andreev.writers.WriterVO;
-
 import java.io.IOException;
 
 public class Main {
@@ -20,6 +19,6 @@ public class Main {
         WRITER_VO.writeVO(properties);
 //        WRITER_OUT.writeOO(properties);
 
-
     }
 }
+
