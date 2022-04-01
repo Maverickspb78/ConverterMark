@@ -1,6 +1,7 @@
 package com.andreev.properties;
 
 public class Properties {
+
     private String pathToWriteFile;
     private String pathToWriteFileO;
     private String fileKMPath;
@@ -22,7 +23,7 @@ public class Properties {
     }
 
     public String getPathToWriteFile() {
-        return this.pathToWriteFile;
+        return pathToWriteFile;
     }
 
     public void setPathToWriteFile(String pathToWriteFile) {
@@ -30,7 +31,7 @@ public class Properties {
     }
 
     public String getPathToWriteFileO() {
-        return this.pathToWriteFileO;
+        return pathToWriteFileO;
     }
 
     public void setPathToWriteFileO(String pathToWriteFileO) {
@@ -38,7 +39,7 @@ public class Properties {
     }
 
     public String getFileKMPath() {
-        return this.fileKMPath;
+        return fileKMPath;
     }
 
     public void setFileKMPath(String fileKMPath) {
@@ -46,7 +47,7 @@ public class Properties {
     }
 
     public String getFileName() {
-        return this.fileName;
+        return fileName;
     }
 
     public void setFileName(String fileName) {
@@ -54,7 +55,7 @@ public class Properties {
     }
 
     public String getPathInOborot() {
-        return this.pathInOborot;
+        return pathInOborot;
     }
 
     public void setPathInOborot(String pathInOborot) {
@@ -62,7 +63,7 @@ public class Properties {
     }
 
     public String getPathOutOborot() {
-        return this.pathOutOborot;
+        return pathOutOborot;
     }
 
     public void setPathOutOborot(String pathOutOborot) {
@@ -70,7 +71,7 @@ public class Properties {
     }
 
     public String getDateOfManufacture() {
-        return this.dateOfManufacture;
+        return dateOfManufacture;
     }
 
     public void setDateOfManufacture(String dateOfManufacture) {
@@ -78,7 +79,7 @@ public class Properties {
     }
 
     public String getInn() {
-        return this.inn;
+        return inn;
     }
 
     public void setInn(String inn) {
@@ -86,7 +87,7 @@ public class Properties {
     }
 
     public String getCodeTNVD() {
-        return this.codeTNVD;
+        return codeTNVD;
     }
 
     public void setCodeTNVD(String codeTNVD) {
@@ -94,7 +95,7 @@ public class Properties {
     }
 
     public String getPrice19LV() {
-        return this.price19LV;
+        return price19LV;
     }
 
     public void setPrice19LV(String price19LV) {
@@ -102,7 +103,7 @@ public class Properties {
     }
 
     public String getPrice19LF() {
-        return this.price19LF;
+        return price19LF;
     }
 
     public void setPrice19LF(String price19LF) {
@@ -110,7 +111,7 @@ public class Properties {
     }
 
     public String getPrice6LV() {
-        return this.price6LV;
+        return price6LV;
     }
 
     public void setPrice6LV(String price6LV) {
@@ -118,7 +119,7 @@ public class Properties {
     }
 
     public String getPrice05LV() {
-        return this.price05LV;
+        return price05LV;
     }
 
     public void setPrice05LV(String price05LV) {
@@ -126,7 +127,7 @@ public class Properties {
     }
 
     public String getNumberDoc() {
-        return this.numberDoc;
+        return numberDoc;
     }
 
     public void setNumberDoc(String numberDoc) {
@@ -134,7 +135,7 @@ public class Properties {
     }
 
     public String getDataPerDoc() {
-        return this.dataPerDoc;
+        return dataPerDoc;
     }
 
     public void setDataPerDoc(String dataPerDoc) {
@@ -142,11 +143,10 @@ public class Properties {
     }
 
     public String getDataOut() {
-        return this.dataOut;
+        return dataOut;
     }
 
     public void setDataOut(String dataOut) {
         this.dataOut = dataOut;
     }
 }
-
