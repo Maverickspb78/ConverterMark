@@ -22,7 +22,6 @@ public class WriterVO {
                 .append(getDateFileName())
                 .append(".csv");
         FileWriter writer = new FileWriter(String.valueOf(path), false);
-        System.out.println(fileKM);
         System.out.println("Путь к файлу: " + properties.getFileKMPath() + "\nИмя файла: " + properties.getFileName());
 
         try{
