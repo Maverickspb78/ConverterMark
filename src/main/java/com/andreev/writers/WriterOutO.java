@@ -1,24 +1,28 @@
 package com.andreev.writers;
 
+import com.andreev.properties.PathProperties;
+import com.andreev.properties.Price;
 import com.andreev.properties.Properties;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
-public class WriterOutO {
+public class WriterOutO implements WriterDoc{
 
-    public void writeOO(Properties properties) throws IOException {
+    private final Utils utils = new Utils();
 
-    final File fileSampleOut = new File(properties.getPathOutOborot());
+    public void writeDoc(Properties properties,
+                         PathProperties pathProperties,
+                         Price price) throws IOException {
+
+    final File fileSampleOut = new File(pathProperties.getPathOutOborot());
     StringBuilder temp = new StringBuilder(50);
-    String[] str = properties.getFileKMPath().split("\\\\");
-    StringBuilder path = new StringBuilder(properties.getPathToWriteFileO())
+    String[] str = pathProperties.getFileKMPath().split("\\\\");
+    StringBuilder path = new StringBuilder(pathProperties.getPathToWriteFileO())
             .append(str[6])
             .append(".")
             .append(str[5])
@@ -26,7 +30,7 @@ public class WriterOutO {
             .append(str[4])
             .append("Вывод_из_оборота_")
             .append(".csv");
-    ArrayList<String> listFile = getAllFileName(properties.getFileKMPath());
+    ArrayList<String> listFile = utils.getAllFileName(pathProperties.getFileKMPath());
     FileWriter writer = new FileWriter(String.valueOf(path), false);
         try {
             Scanner scannerSample = new Scanner( new FileInputStream(fileSampleOut));
@@ -41,9 +45,9 @@ public class WriterOutO {
             scannerSample.close();
             int countAll = 0;
             for (int i = 0; i < listFile.size(); i++) {
-                properties.setFileName(listFile.get(i));
-                File fileKM = new File(properties.getFileKMPath() + "\\" + properties.getFileName());
-                String price = parsFileNameForPrice(properties);
+                pathProperties.setFileName(listFile.get(i));
+                File fileKM = new File(pathProperties.getFileKMPath() + "\\" + pathProperties.getFileName());
+                String priceStr = utils.parsFileNameForPrice(pathProperties, price);
                 Scanner scannerKM = new Scanner(fileKM);
                 System.out.println("файл: " + fileKM.getName());
                 int count = 0;
@@ -67,7 +71,7 @@ public class WriterOutO {
                                     .append(line.substring(0, 31).replace("\"", "\"\""))
                                     .append("\"")
                                     .append(",")
-                                    .append(price)
+                                    .append(priceStr)
                                     .append(",,,,")
                             ));
                             count++;
@@ -77,7 +81,7 @@ public class WriterOutO {
                                     .append(line.substring(0, 31).replace("\"", "\"\""))
                                     .append("\"")
                                     .append(",")
-                                    .append(price)
+                                    .append(priceStr)
                                     .append(",,,,")
                                     .append("\n")
                             ));
@@ -85,54 +89,17 @@ public class WriterOutO {
                             countAll +=count;
                             temp.delete(0, temp.length());
                         }
-                        System.out.println("обработано: " + count + " кодов маркировки, всего обработано: " + countAll);
+
+                        utils.printCountCodes(count, countAll);
                     }
                 }
                 scannerKM.close();
             }
             writer.flush();
             writer.close();
-        }
-        catch(
-    IOException e) {
+            System.out.println("============================================");
+        } catch(IOException e) {
         System.err.println(e.getMessage());
-    }
         }
-
-
-
-    private String getDateFileName (){
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-        return format.format(date);
-    }
-
-    public static ArrayList<String> getAllFileName(String path) {
-        ArrayList <String> list = new ArrayList <String> ();
-        File file = new File(path);
-        String[] str = file.list();
-        boolean add = false;
-        for (String l: str) {
-            add = list.add(l);
-        }
-        if (add) {
-            return list;
-        }
-        return null;
-    }
-
-    public String parsFileNameForPrice(Properties properties){
-        String[] arr = properties.getFileName().split("\\.");
-        if (arr[1].startsWith("19LV")){
-            return properties.getPrice19LV();
-        } else if (arr[1].startsWith("19LF")){
-            return properties.getPrice19LF();
-        } else if (arr[1].startsWith("6LV")){
-            return properties.getPrice6LV();
-        } else if (arr[1].startsWith("0,5LV")){
-            return properties.getPrice05LV();
-        }
-
-        return "Wrong file name";
     }
 }
