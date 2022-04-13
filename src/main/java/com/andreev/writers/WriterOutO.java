@@ -49,6 +49,7 @@ public class WriterOutO implements WriterDoc{
                 File fileKM = new File(pathProperties.getFileKMPath() + "\\" + pathProperties.getFileName());
                 String priceStr = utils.parsFileNameForPrice(pathProperties, price);
                 Scanner scannerKM = new Scanner(fileKM);
+                System.out.println("файл: " + fileKM.getName());
                 int count = 0;
                 while (scannerKM.hasNextLine()) {
                     String line = scannerKM.nextLine();
@@ -88,6 +89,7 @@ public class WriterOutO implements WriterDoc{
                             countAll +=count;
                             temp.delete(0, temp.length());
                         }
+
                         utils.printCountCodes(count, countAll);
                     }
                 }

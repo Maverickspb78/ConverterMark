@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class Main {
 
-
     private static Properties properties;
     private static PathProperties pathProperties;
     private static Price price;
