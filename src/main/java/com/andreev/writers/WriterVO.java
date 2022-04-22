@@ -3,6 +3,8 @@ package com.andreev.writers;
 import com.andreev.properties.PathProperties;
 import com.andreev.properties.Price;
 import com.andreev.properties.Properties;
+import com.andreev.utils.Utils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;

@@ -1,4 +1,4 @@
-package com.andreev.writers;
+package com.andreev.utils;
 
 import com.andreev.properties.PathProperties;
 import com.andreev.properties.Price;
@@ -50,5 +50,14 @@ public class Utils {
         System.out.println("обработано: " + count + " кодов маркировки, всего обработано: " + countAll);
     }
 
+    public int parsStringToInt (String s){
+        int number = -1;
+        try {
+            number = Integer.parseInt(s.trim());
+        } catch (Exception e){
+            System.err.println("введено не число");
 
+        }
+        return number;
+    }
 }
