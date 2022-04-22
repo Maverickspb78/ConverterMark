@@ -1,12 +1,12 @@
 +++ путь к папке с файлом кодов маркировки+++
 pathToFileKM R:\PUBLIC\Markerovka\Gidro\2022\03\10
 +++ имя файла с кодами маркировки+++
-fileName 2(300.19LV)order_aad4c646-e843-420e-b401-e4fc671d83c6_gtin_04603734326017_quantity_300_13093904868183667122.csv
+fileName order_aad4c646-e843-420e-b401-e4fc671d83c6_gtin_04603734326017_quantity_300_13093904868183667122.csv
 +++ путь куда сохранять файл ввод в оборот загрузки+++
 pathToWriteFile C:\fileToCZ\vvod\
 +++ путь куда сохранять файл вывод из оборота загрузки+++
 pathWriteFileO C:\fileToCZ\vivod\
-+++ путь и имя файла шаблона+++
++++ путь и имя файла шаблона ввод в оборот+++
 pathInOborot sample/VvodVOborot.csv
 +++ путь и имя файла шаблона+++
 pathOutOborot sample/OutOborot.csv
