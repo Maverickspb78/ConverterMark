@@ -28,7 +28,6 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-//        Scanner scanner = new Scanner(System.in);
         readProps(readerProperties.readPropertiesFile());
         System.out.println("выберете действие:\n1. Настройка\n2. Заполнить документ\n0. Выход");
         while (scanner.hasNextLine()) {
@@ -48,10 +47,26 @@ public class Main {
     }
 
     private static void writerDocuments(Scanner scanner) throws IOException {
+
         System.out.println("выберете вид документа:\n1. Ввод в оборот\n2. Вывод из оборота\n0. Выход");
         while (scanner.hasNextLine()) {
             int number = utils.parsStringToInt(scanner.nextLine());
             if (number == 1) {
+                pathToFile = new PathToFile();
+                System.out.println("выберите папку");
+                pathProperties.setFileKMPath(pathToFile.walkFileSystem(scanner).getAbsolutePath());
+                String[] date = pathProperties.getFileKMPath().split("\\\\");
+                properties.setDateOfManufacture(date[date.length-3] + "-" + date[date.length-2] + "-" +date[date.length-1]);
+                System.out.println("Дата производства " + properties.getDateOfManufacture() + ". Изменить дату производства?\n1. Да\n2. Нет");
+                int num = utils.parsStringToInt(scanner.nextLine());
+                if (num == 1){
+                    System.out.println("введите даду производства в формате год-месяц-день");
+                    properties.setDateOfManufacture(scanner.nextLine());
+                }
+                System.out.println("выбирете фирму\n1. Гидротехнология\n2. Оазис");
+                num = utils.parsStringToInt(scanner.nextLine());
+                setupInn(num);
+                writeSettings.writeSettings(properties, pathProperties, price);
                 readProps(readerProperties.readPropertiesFile());
                 writerVO.writeDoc(properties, pathProperties, price);
             } else if (number == 2) {
@@ -68,20 +83,6 @@ public class Main {
     }
 
     private static void changeProperties() throws IOException {
-        /*
-        * 1. Изменить системные настройки
-        * (файлы шаблонов и хранения записаных фалов, код ТНВЭД)
-        * 2. Путь к кодам маркировки
-        * 3. Дата производства
-        * 4. Выбор фирмы
-        * 5. Дата вывода из оборота
-        * 6. Номер первичного документа
-        * 7. Дата первичного документа
-        * 8. Дата вывода из оборота
-        * 9. Прайс лист
-        *
-        * */
-
         pathToFile = new PathToFile();
         printMenu.printSettings();
         while (scanner.hasNextLine()) {
@@ -97,13 +98,10 @@ public class Main {
             } else if (number == 4) {
                 System.out.println("Выберите фирму:\n1. Гидротехнология\n2. Оазис\n0. Назад");
                 number = utils.parsStringToInt(scanner.nextLine());
-                if (number == 1){
-                    properties.setInn("7814075424");
-                } else if (number == 2){
-                    properties.setInn("7814216234");
-                }
+                setupInn(number);
                 printMenu.printSettings();
             } else if (number == 5) {
+
                 printMenu.printSettings();
             } else if (number == 6) {
                 printMenu.printSettings();
@@ -132,5 +130,14 @@ public class Main {
         pathProperties = (PathProperties) props.get(1);
         price = (Price) props.get(2);
     }
+
+    private static void setupInn(int number){
+        if (number == 1){
+            properties.setInn("7814075424");
+        } else if (number == 2){
+            properties.setInn("7814216234");
+        }
+    }
+
 }
 
