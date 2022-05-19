@@ -1,10 +1,7 @@
 package com.andreev;
 
 import com.andreev.properties.*;
-import com.andreev.utils.PathToFile;
-import com.andreev.utils.PrintMenu;
-import com.andreev.utils.Utils;
-import com.andreev.utils.WriteSettings;
+import com.andreev.utils.*;
 import com.andreev.writers.WriterOutO;
 import com.andreev.writers.WriterVO;
 
@@ -18,10 +15,11 @@ public class Main {
     private static PathProperties pathProperties;
     private static Price price;
     private static ArrayList<Prop> props;
+    private static CutTheFile cutTheFile= new CutTheFile();
     private static final ReaderProperties readerProperties = new ReaderProperties();
     private static final WriterVO writerVO = new WriterVO();
     private static final WriterOutO writerOut = new WriterOutO();
-    private static PathToFile pathToFile;
+    private static PathToFile pathToFile = new PathToFile();
     private static WriteSettings writeSettings = new WriteSettings();
     private static final PrintMenu printMenu = new PrintMenu();
     private static final Utils utils = new Utils();
@@ -29,13 +27,17 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         readProps(readerProperties.readPropertiesFile());
-        System.out.println("выберете действие:\n1. Настройка\n2. Заполнить документ\n0. Выход");
+        printMenu.printMainMenu();
         while (scanner.hasNextLine()) {
             int number = utils.parsStringToInt(scanner.nextLine());
             if (number == 1) {
                 changeProperties();
             } else if (number == 2) {
                 writerDocuments(scanner);
+            } else if (number == 3){
+                pathProperties.setFileKMPath("R:\\PUBLIC\\Markerovka\\FilesKM");
+                writeSettings.writeSettings(properties, pathProperties, price);
+                cutTheFile.cutTheFile(scanner, pathToFile.walkFileSystem(scanner));
             }else if (number == 0) {
                 System.exit(1);
             } else {
@@ -52,7 +54,6 @@ public class Main {
         while (scanner.hasNextLine()) {
             int number = utils.parsStringToInt(scanner.nextLine());
             if (number == 1) {
-                pathToFile = new PathToFile();
                 System.out.println("выберите папку");
                 pathProperties.setFileKMPath(pathToFile.walkFileSystem(scanner).getAbsolutePath());
                 String[] date = pathProperties.getFileKMPath().split("\\\\");

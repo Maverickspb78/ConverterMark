@@ -10,7 +10,7 @@ public class PrintMenu {
     }
 
     public void printMainMenu(){
-        System.out.println("выберете действие:\n1. Настройка\n2. Заполнить документ\n0. Выход");
+        System.out.println("выберете действие:\n1. Настройка\n2. Заполнить документ\n3. Работа с файлами маркеровки\n0. Выход");
     }
 
     public void printUpBack(){
@@ -19,5 +19,9 @@ public class PrintMenu {
 
     public void printDocumentType(){
         System.out.println("выберете вид документа:\n1. Ввод в оборот\n2. Вывод из оборота\n0. Выход");
+    }
+
+    public void printWorkingWithFiles(){
+        System.out.println("Выберите действие:\n1. Обрезать файл\n2. \n0. Выход\n");
     }
 }
