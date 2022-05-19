@@ -23,6 +23,7 @@ public class PathToFile {
         files = new File(pathProperties.getFileKMPath());
         int number;
         System.out.println("Навигатор по фаловой системе");
+        System.out.println("-1. Markerovka");
         listDir(files);
         while (scanner.hasNextLine()) {
             number = utils.parsStringToInt(scanner.nextLine());
@@ -31,6 +32,9 @@ public class PathToFile {
                 listDir(files);
             } else if (number == 0) {
                 break;
+            } else if (number == -1) {
+                files = new File("R:\\PUBLIC\\Markerovka");
+                listDir(files);
             } else {
                 changDirDown(files, number);
             }
@@ -45,6 +49,20 @@ public class PathToFile {
         for (int i = 0; i < files1.length; i++) {
             if (files1[i].isDirectory()) {
                 System.out.println((i + 2) + " " + files1[i].getName() + " \t folder");
+            }
+        }
+        System.out.println("+++++++++++++++++++++++++++++++++");
+    }
+
+    private void listDirAndFiles(File tempFile){
+        File[] files1 = tempFile.listFiles();
+        System.out.println(tempFile.getAbsolutePath());
+        printMenu.printUpBack();
+        for (int i = 0; i < files1.length; i++) {
+            if (files1[i].isDirectory()) {
+                System.out.println((i + 2) + " " + files1[i].getName() + " \t folder");
+            } else {
+                System.out.println((i + 2) + " " + files1[i].getName() + " \t file");
             }
         }
         System.out.println("+++++++++++++++++++++++++++++++++");

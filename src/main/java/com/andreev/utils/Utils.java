@@ -4,7 +4,7 @@ import com.andreev.properties.PathProperties;
 import com.andreev.properties.Price;
 import com.andreev.properties.Properties;
 
-import java.io.File;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +41,7 @@ public class Utils {
     }
 
     public String getDateFileName (){
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         return format.format(date);
     }
@@ -58,6 +58,45 @@ public class Utils {
             System.err.println("введено не число");
 
         }
+        return number;
+    }
+
+    public String markPars(File file) throws IOException {
+        String code = null;
+        String[] pars = file.getName().split("_");
+        int i;
+        if (pars[0].startsWith("order")){
+            i = 3;
+        } else {
+            i = 4;
+        }
+        int lines = numberCodeMark(file);
+        if (pars[i].equals("04603734326017")){
+            code = "Вода 19 литров, " + lines + " кодов маркировки осталось";
+        } else if (pars[i].equals("04603734326031")){
+            code = "Вода 6 литров, " + lines + " кодов маркировки осталось";
+        } else if (pars[i].equals("04603734326048")){
+            code = "Вода 0.5 литров, " + lines + " кодов маркировки осталось";
+        } else if (pars[i].equals("04603734326062")){
+            code = "Фтор 19 литров, " + lines + " кодов маркировки осталось";
+        } else if (pars[i].equals("00046037343260")){
+            code = "Вода 19 литров, " + lines + " кодов маркировки осталось";
+        }
+        return code;
+    }
+
+    public String getCompany(File file){
+        String[] pars = file.getName().split("_");
+        if (pars[3].equals("00046037343260")){
+            return "R:\\PUBLIC\\Markerovka\\Oasis";
+        } else return "R:\\PUBLIC\\Markerovka\\Gidro";
+    }
+
+    public int numberCodeMark(File file) throws IOException {
+        int number = 0;
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        while (reader.readLine() != null) number++;
+        reader.close();
         return number;
     }
 }
