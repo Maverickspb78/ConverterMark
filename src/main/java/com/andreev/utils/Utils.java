@@ -87,9 +87,15 @@ public class Utils {
 
     public String getCompany(File file){
         String[] pars = file.getName().split("_");
-        if (pars[3].equals("00046037343260")){
-            return "R:\\PUBLIC\\Markerovka\\Oasis";
-        } else return "R:\\PUBLIC\\Markerovka\\Gidro";
+        if (pars[0].startsWith("o")){
+            if (pars[3].equals("00046037343260")){
+                return "R:\\PUBLIC\\Markerovka\\Oasis";
+            } else return "R:\\PUBLIC\\Markerovka\\Gidro";
+        } else {
+            if (pars[4].equals("00046037343260")) {
+                return "R:\\PUBLIC\\Markerovka\\Oasis";
+            } else return "R:\\PUBLIC\\Markerovka\\Gidro";
+        }
     }
 
     public int numberCodeMark(File file) throws IOException {
