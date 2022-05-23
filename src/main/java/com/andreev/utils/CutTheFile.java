@@ -3,6 +3,7 @@ package com.andreev.utils;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class CutTheFile {
@@ -36,6 +37,9 @@ public class CutTheFile {
         StringBuilder nameIn = new StringBuilder(); //Имя файла после вырезки
         nameOut.append(utils.getCompany(file)).append("\\").append(data[0]).append("\\").append(data[1]).append("\\")
                 .append(data[2]).append("\\");
+        if (!Files.exists(Paths.get(String.valueOf(nameOut)))){
+            new File(String.valueOf(nameOut)).mkdir();
+        }
         System.out.println("********************************");
         if (fileName[0].startsWith("order")){
             System.out.println(fileName[5]);
