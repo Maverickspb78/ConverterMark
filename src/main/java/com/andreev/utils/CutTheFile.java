@@ -36,7 +36,7 @@ public class CutTheFile {
         StringBuilder nameIn = new StringBuilder(); //Имя файла после вырезки
         nameOut.append(utils.getCompany(file)).append("\\").append(data[0]).append("\\").append(data[1]).append("\\")
                 .append(data[2]).append("\\");
-        System.out.println();
+        System.out.println("********************************");
         if (fileName[0].startsWith("order")){
             System.out.println(fileName[5]);
             System.out.println(Integer.parseInt(fileName[5]) - numbKM);
@@ -49,16 +49,18 @@ public class CutTheFile {
         } else {
             try {
                 nameOut.append(file.getName(), file.getName().indexOf("o"), file.getName().lastIndexOf("quantity_"))
-                        .append(numbKM).append("_").append(fileName[fileName.length - 1]);
+                        .append("quantity_").append(numbKM).append("_").append(fileName[fileName.length - 1]);
                 nameIn.append("R:\\PUBLIC\\Markerovka\\FilesKM\\").append((Integer.parseInt(fileName[0]) + 1))
                         .append(file.getName(), file.getName().indexOf("_"), file.getName().lastIndexOf("quantity_"))
-                        .append((Integer.parseInt(fileName[6]) - numbKM)).append("_").append(fileName[fileName.length - 1]);
+                        .append("quantity_").append((Integer.parseInt(fileName[6]) - numbKM)).append("_")
+                        .append(fileName[fileName.length - 1]);
             } catch (Exception e){
                 System.err.println("не верное имя файла");
             }
         }
-        System.out.println(nameOut);
-        System.out.println(nameIn);
+        System.out.println("nameOut: " + nameOut);
+        System.out.println("nameIn: " + nameIn);
+        System.out.println("********************************");
         if (utils.numberCodeMark(file) > numbKM) {
             FileWriter writerOut = new FileWriter(String.valueOf(nameOut));
             FileWriter writerIn = new FileWriter(String.valueOf(nameIn));
