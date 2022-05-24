@@ -64,8 +64,9 @@ public class CutTheFile {
         }
         System.out.println("nameOut: " + nameOut);
         System.out.println("nameIn: " + nameIn);
+        Files.copy(Path.of(file.getPath()), Path.of(("R:\\PUBLIC\\Markerovka\\Backup\\" + file.getName())));
         System.out.println("********************************");
-        if (utils.numberCodeMark(file) > numbKM) {
+        if (utils.numberCodeMark(file) >= numbKM) {
             FileWriter writerOut = new FileWriter(String.valueOf(nameOut));
             FileWriter writerIn = new FileWriter(String.valueOf(nameIn));
             Scanner scannerRead = new Scanner(file);
