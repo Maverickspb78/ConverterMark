@@ -1,7 +1,5 @@
 package com.andreev.properties;
 
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,8 +19,7 @@ public class ReaderProperties {
             Scanner sc = new Scanner(new FileInputStream(PROPERTIESPATH));
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
-                if (line.startsWith("+++")||line.startsWith("/")) {
-                } else {
+                if (!line.startsWith("+++")||line.startsWith("/")) {
                     if (line.startsWith("pathToFileKM")) {
                         String[] str = line.split(" ");
                         pathProperties.setFileKMPath(str[1]);

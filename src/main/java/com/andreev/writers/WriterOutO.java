@@ -59,7 +59,7 @@ public class WriterOutO implements WriterDoc{
                                         .append(line.substring(0, 31).replace("\"", "\"\""))
                                         .append("\"")
                                         .append(",")
-                                        .append(price)
+                                        .append(priceStr)
                                         .append(",,,,")
                                         .append("\n")
                         ));

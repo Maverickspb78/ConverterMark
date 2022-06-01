@@ -14,7 +14,6 @@ public class Main {
     private static Properties properties;
     private static PathProperties pathProperties;
     private static Price price;
-    private static ArrayList<Prop> props;
     private static CutTheFile cutTheFile= new CutTheFile();
     private static final ReaderProperties readerProperties = new ReaderProperties();
     private static final WriterVO writerVO = new WriterVO();
@@ -49,8 +48,7 @@ public class Main {
     }
 
     private static void writerDocuments(Scanner scanner) throws IOException {
-
-        System.out.println("выберете вид документа:\n1. Ввод в оборот\n2. Вывод из оборота\n0. Выход");
+        printMenu.printDocumentType();
         while (scanner.hasNextLine()) {
             int number = utils.parsStringToInt(scanner.nextLine());
             if (number == 1) {
@@ -58,19 +56,84 @@ public class Main {
                 pathProperties.setFileKMPath(pathToFile.walkFileSystem(scanner).getAbsolutePath());
                 String[] date = pathProperties.getFileKMPath().split("\\\\");
                 properties.setDateOfManufacture(date[date.length-3] + "-" + date[date.length-2] + "-" +date[date.length-1]);
-                System.out.println("Дата производства " + properties.getDateOfManufacture() + ". Изменить дату производства?\n1. Да\n2. Нет");
+                System.out.println("Дата производства " + properties.getDateOfManufacture() + ". Изменить дату производства?\n0. Выход\n1. Да\n2. Нет");
                 int num = utils.parsStringToInt(scanner.nextLine());
                 if (num == 1){
                     System.out.println("введите даду производства в формате год-месяц-день");
                     properties.setDateOfManufacture(scanner.nextLine());
+                } else if (num == 0) {
+                    printMenu.printMainMenu();
+                    return;
                 }
                 System.out.println("выбирете фирму\n1. Гидротехнология\n2. Оазис");
                 num = utils.parsStringToInt(scanner.nextLine());
+                if (num == 0){
+                    printMenu.printMainMenu();
+                    return;
+                }
                 setupInn(num);
                 writeSettings.writeSettings(properties, pathProperties, price);
                 readProps(readerProperties.readPropertiesFile());
                 writerVO.writeDoc(properties, pathProperties, price);
             } else if (number == 2) {
+                System.out.println("Выбрана фирма: " + (properties.getInn().equals("7814075424") ? "Гидротехнология" : "Оазис"));
+                System.out.println("Дата вывода из оборота: " + properties.getDataOut());
+                System.out.println("Номер первичного документа: " + properties.getNumberDoc());
+                System.out.println("Дата первичного документа: " + properties.getDataPerDoc());
+                System.out.println("Изменить настройки?\n1. Да\n2. Нет\n0. Выход");
+                number = utils.parsStringToInt(scanner.nextLine());
+                if (number == 1){
+                    System.out.println("Выбрана фирма: " + (properties.getInn().equals("7814075424") ? "Гидротехнология" : "Оазис"));
+                    System.out.println("Изменить фирму?\n1. Да\n2. Нет\n0. Выход");
+                    number = utils.parsStringToInt(scanner.nextLine());
+                    if (number == 1){
+                        System.out.println("1. Гидротехнология\n2. Оазис\n3. Выход");
+                        number = utils.parsStringToInt(scanner.nextLine());
+                        if (number == 1){
+                            properties.setInn("7814075424");
+                        } else if (number == 2){
+                            properties.setInn("7814216234");
+                        } else if (number == 0) {
+                            return;
+                        }
+                    }
+                    writeSettings.writeSettings(properties, pathProperties, price);
+                    System.out.println("Дата вывода из оборота: " + properties.getDataOut());
+                    System.out.println("Изменить дату вывода из оборота?\n1. Да\n2. Нет\n0. Выход");
+                    number = utils.parsStringToInt(scanner.nextLine());
+                    if (number == 1){
+                        System.out.println("Введите дату вывода из оборота в формате гггг-мм-дд");
+                        properties.setDataOut(scanner.nextLine());
+                    } else if (number == 0){
+                        return;
+                    }
+                    writeSettings.writeSettings(properties, pathProperties, price);
+                    System.out.println("Номер первичного документа: " + properties.getNumberDoc());
+                    System.out.println("Изменить номер документа?\n1. Да\n2. Нет\n0. Выход");
+                    number = utils.parsStringToInt(scanner.nextLine());
+                    if (number == 1){
+                        System.out.println("Введите номер первичного документа");
+                        properties.setNumberDoc(scanner.nextLine());
+                    } else if (number == 0){
+                        return;
+                    }
+                    writeSettings.writeSettings(properties, pathProperties, price);
+                    System.out.println("Дата первичного документа: " + properties.getDataPerDoc());
+                    System.out.println("Изменить дату первичного документа?\n1. Да\n2. Нет\n0. Выход");
+                    number = utils.parsStringToInt(scanner.nextLine());
+                    if (number == 1){
+                        System.out.println("Введите дату первичного документа в формате гггг-мм-дд");
+                        properties.setDataPerDoc(scanner.nextLine());
+                    } else if (number == 0){
+                        return;
+                    }
+                    writeSettings.writeSettings(properties, pathProperties, price);
+                } else if (number == 0){
+                    return;
+                }
+                System.out.println("выберите папку");
+                pathProperties.setFileKMPath(pathToFile.walkFileSystem(scanner).getAbsolutePath());
+                writeSettings.writeSettings(properties, pathProperties, price);
                 readProps(readerProperties.readPropertiesFile());
                 writerOut.writeDoc(properties, pathProperties, price);
             } else if (number == 0) {
