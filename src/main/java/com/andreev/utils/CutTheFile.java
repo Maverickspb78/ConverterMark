@@ -62,36 +62,51 @@ public class CutTheFile {
                 System.err.println("не верное имя файла");
             }
         }
+        // проверяем существование файла. Если существует то дописываем +1 к имени файла(работает до 9)
+        int countC = 0;
+        while (new File(String.valueOf(nameOut)).exists()){
+            int i = nameOut.indexOf("order");
+            if (countC != 0) {
+                int countFileNumber = Integer.parseInt(nameOut.substring(i - 1, i));
+                countFileNumber++;
+                nameOut.deleteCharAt(i-1);
+                nameOut.insert(nameOut.indexOf("order"), countFileNumber);
+                System.out.println(nameOut);
+            } else {
+                nameOut.insert(nameOut.indexOf("order"), "1");
+            }
+            countC++;
+        }
         System.out.println("nameOut: " + nameOut);
         System.out.println("nameIn: " + nameIn);
         System.out.println("********************************");
-        if (utils.numberCodeMark(file) >= numbKM) {
-            Files.copy(Path.of(file.getPath()), Path.of(("R:\\PUBLIC\\Markerovka\\Backup\\" + file.getName())));
-            FileWriter writerOut = new FileWriter(String.valueOf(nameOut));
-            FileWriter writerIn = new FileWriter(String.valueOf(nameIn));
-            Scanner scannerRead = new Scanner(file);
-            int count = 1;
-            while (scannerRead.hasNextLine()){
-                String temp = scannerRead.nextLine();
-                if (count > numbKM){
-                    writerIn.write(temp);
-                    if (scannerRead.hasNextLine()){
-                        writerIn.write("\n");
-                    }
-                } else {
-                    writerOut.write(temp);
-                    if ((numbKM - count) > 0){
-                        writerOut.write("\n");
-                    }
-                }
-                count++;
-            }
-            writerOut.close();
-            writerIn.close();
-            scannerRead.close();
-            Files.delete(Path.of(file.getAbsolutePath())); // удаление файла с которого вырезали
-        } else {
-            System.err.println("В файле осталось меньше КМ, чем нужно выделить");
-        }
+//        if (utils.numberCodeMark(file) >= numbKM) {
+//            Files.copy(Path.of(file.getPath()), Path.of(("R:\\PUBLIC\\Markerovka\\Backup\\" + file.getName())));
+//            FileWriter writerOut = new FileWriter(String.valueOf(nameOut));
+//            FileWriter writerIn = new FileWriter(String.valueOf(nameIn));
+//            Scanner scannerRead = new Scanner(file);
+//            int count = 1;
+//            while (scannerRead.hasNextLine()){
+//                String temp = scannerRead.nextLine();
+//                if (count > numbKM){
+//                    writerIn.write(temp);
+//                    if (scannerRead.hasNextLine()){
+//                        writerIn.write("\n");
+//                    }
+//                } else {
+//                    writerOut.write(temp);
+//                    if ((numbKM - count) > 0){
+//                        writerOut.write("\n");
+//                    }
+//                }
+//                count++;
+//            }
+//            writerOut.close();
+//            writerIn.close();
+//            scannerRead.close();
+//            Files.delete(Path.of(file.getAbsolutePath())); // удаление файла с которого вырезали
+//        } else {
+//            System.err.println("В файле осталось меньше КМ, чем нужно выделить");
+//        }
     }
 }
