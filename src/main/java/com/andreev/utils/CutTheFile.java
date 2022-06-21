@@ -62,6 +62,21 @@ public class CutTheFile {
                 System.err.println("не верное имя файла");
             }
         }
+        // проверяем существование файла. Если существует то дописываем +1 к имени файла(работает до 9)
+        int countC = 0;
+        while (new File(String.valueOf(nameOut)).exists()){
+            int i = nameOut.indexOf("order");
+            if (countC != 0) {
+                int countFileNumber = Integer.parseInt(nameOut.substring(i - 1, i));
+                countFileNumber++;
+                nameOut.deleteCharAt(i-1);
+                nameOut.insert(nameOut.indexOf("order"), countFileNumber);
+                System.out.println(nameOut);
+            } else {
+                nameOut.insert(nameOut.indexOf("order"), "1");
+            }
+            countC++;
+        }
         System.out.println("nameOut: " + nameOut);
         System.out.println("nameIn: " + nameIn);
         System.out.println("********************************");
