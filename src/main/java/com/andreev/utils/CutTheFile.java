@@ -80,33 +80,33 @@ public class CutTheFile {
         System.out.println("nameOut: " + nameOut);
         System.out.println("nameIn: " + nameIn);
         System.out.println("********************************");
-//        if (utils.numberCodeMark(file) >= numbKM) {
-//            Files.copy(Path.of(file.getPath()), Path.of(("R:\\PUBLIC\\Markerovka\\Backup\\" + file.getName())));
-//            FileWriter writerOut = new FileWriter(String.valueOf(nameOut));
-//            FileWriter writerIn = new FileWriter(String.valueOf(nameIn));
-//            Scanner scannerRead = new Scanner(file);
-//            int count = 1;
-//            while (scannerRead.hasNextLine()){
-//                String temp = scannerRead.nextLine();
-//                if (count > numbKM){
-//                    writerIn.write(temp);
-//                    if (scannerRead.hasNextLine()){
-//                        writerIn.write("\n");
-//                    }
-//                } else {
-//                    writerOut.write(temp);
-//                    if ((numbKM - count) > 0){
-//                        writerOut.write("\n");
-//                    }
-//                }
-//                count++;
-//            }
-//            writerOut.close();
-//            writerIn.close();
-//            scannerRead.close();
-//            Files.delete(Path.of(file.getAbsolutePath())); // удаление файла с которого вырезали
-//        } else {
-//            System.err.println("В файле осталось меньше КМ, чем нужно выделить");
-//        }
+        if (utils.numberCodeMark(file) >= numbKM) {
+            Files.copy(Path.of(file.getPath()), Path.of(("R:\\PUBLIC\\Markerovka\\Backup\\" + file.getName())));
+            FileWriter writerOut = new FileWriter(String.valueOf(nameOut));
+            FileWriter writerIn = new FileWriter(String.valueOf(nameIn));
+            Scanner scannerRead = new Scanner(file);
+            int count = 1;
+            while (scannerRead.hasNextLine()){
+                String temp = scannerRead.nextLine();
+                if (count > numbKM){
+                    writerIn.write(temp);
+                    if (scannerRead.hasNextLine()){
+                        writerIn.write("\n");
+                    }
+                } else {
+                    writerOut.write(temp);
+                    if ((numbKM - count) > 0){
+                        writerOut.write("\n");
+                    }
+                }
+                count++;
+            }
+            writerOut.close();
+            writerIn.close();
+            scannerRead.close();
+            Files.delete(Path.of(file.getAbsolutePath())); // удаление файла с которого вырезали
+        } else {
+            System.err.println("В файле осталось меньше КМ, чем нужно выделить");
+        }
     }
 }
