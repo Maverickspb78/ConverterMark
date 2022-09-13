@@ -22,10 +22,16 @@ public class WriterVO implements WriterDoc{
 
         final File fileSampleVO = new File(pathProperties.getPathInOborot());
         final String org;
+        String declNumber;
+        String dateDocDecl;
         if (properties.getInn().equals("7814075424")){
             org = "Гидро";
+            declNumber = "ЕАЭС N RU Д-RU.АЯ61.В.04544/19";
+            dateDocDecl = "18.07.2019";
         } else {
             org = "Оазис";
+            declNumber = "ЕАЭС N RU Д-RU.РА02.В.13869/22";
+            dateDocDecl = "28.02.2022";
         }
         StringBuilder temp = new StringBuilder(70);
         ArrayList<String> listFile = utils.getAllFileName(pathProperties.getFileKMPath());
@@ -45,6 +51,17 @@ public class WriterVO implements WriterDoc{
             int countAll = 0;
             for (int i = 0; i < listFile.size(); i++) {
                 pathProperties.setFileName(listFile.get(i));
+                if (listFile.get(i).contains("04603734326017") || listFile.get(i).contains("04603734326031") ||
+                        listFile.get(i).contains("04603734326048")){
+                    declNumber = "ЕАЭС N RU Д-RU.АЯ61.В.04544/19";
+                    dateDocDecl = "18.07.2019";
+                } else if (listFile.get(i).contains("04603734326062")){
+                    declNumber = "ЕАЭС N RU Д-RU.РА01.В.62422/20";
+                    dateDocDecl = "22.07.2020";
+                } else if (listFile.get(i).contains("00046037343260")){
+                    declNumber = "ЕАЭС N RU Д-RU.РА02.В.13869/22";
+                    dateDocDecl = "28.02.2022";
+                }
                 System.out.println("Путь к файлу: " + pathProperties.getFileKMPath() + "\nИмя файла: " + pathProperties.getFileName());
                 File fileKM = new File(pathProperties.getFileKMPath() + "\\" + pathProperties.getFileName());
                 Scanner scannerKM = new Scanner(fileKM);
@@ -59,7 +76,13 @@ public class WriterVO implements WriterDoc{
                                 .append(properties.getDateOfManufacture())
                                 .append(",")
                                 .append(properties.getCodeTNVD())
-                                .append(",,,,,")
+                                .append(",")
+                                .append("Декларация о соответствии")
+                                .append(",")
+                                .append(declNumber)
+                                .append(",")
+                                .append(dateDocDecl)
+                                .append(",,")
                                 .append("\n")
                         ));
                         count++;
@@ -73,7 +96,13 @@ public class WriterVO implements WriterDoc{
                                     .append(properties.getDateOfManufacture())
                                     .append(",")
                                     .append(properties.getCodeTNVD())
-                                    .append(",,,,,")
+                                    .append(",")
+                                    .append("Декларация о соответствии")
+                                    .append(",")
+                                    .append(declNumber)
+                                    .append(",")
+                                    .append(dateDocDecl)
+                                    .append(",,")
                             ));
                             count++;
                             countAll +=count;
@@ -85,7 +114,13 @@ public class WriterVO implements WriterDoc{
                                     .append(properties.getDateOfManufacture())
                                     .append(",")
                                     .append(properties.getCodeTNVD())
-                                    .append(",,,,,")
+                                    .append(",")
+                                    .append("Декларация о соответствии")
+                                    .append(",")
+                                    .append(declNumber)
+                                    .append(",")
+                                    .append(dateDocDecl)
+                                    .append(",,")
                                     .append("\n")
                             ));
                             count++;
