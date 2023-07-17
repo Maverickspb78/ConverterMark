@@ -26,8 +26,8 @@ public class WriterVO implements WriterDoc{
         String dateDocDecl;
         if (properties.getInn().equals("7814075424")){
             org = "Гидро";
-            declNumber = "ЕАЭС N RU Д-RU.АЯ61.В.04544/19";
-            dateDocDecl = "18.07.2019";
+            declNumber = "ЕАЭС N RU Д-RU.РА05.В.47088/23";
+            dateDocDecl = "17.07.2023";
         } else {
             org = "Оазис";
             declNumber = "ЕАЭС N RU Д-RU.РА02.В.13869/22";
@@ -53,8 +53,8 @@ public class WriterVO implements WriterDoc{
                 pathProperties.setFileName(listFile.get(i));
                 if (listFile.get(i).contains("04603734326017") || listFile.get(i).contains("04603734326031") ||
                         listFile.get(i).contains("04603734326048")){
-                    declNumber = "ЕАЭС N RU Д-RU.АЯ61.В.04544/19";
-                    dateDocDecl = "18.07.2019";
+                    declNumber = "ЕАЭС N RU Д-RU.РА05.В.47088/23";
+                    dateDocDecl = "17.07.2023";
                 } else if (listFile.get(i).contains("04603734326062")){
                     declNumber = "ЕАЭС N RU Д-RU.РА01.В.62422/20";
                     dateDocDecl = "22.07.2020";

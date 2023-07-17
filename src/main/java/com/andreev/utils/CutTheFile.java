@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CutTheFile {
@@ -12,6 +14,7 @@ public class CutTheFile {
 
     public void cutTheFile(Scanner scanner, File file) throws IOException {
         File[] dir = file.listFiles();
+        Map<Integer, String> map = new HashMap<>();
         int number = 0;
         System.out.println("Выбирите Файл\n0. Выход");
         for (int i = 0; i < dir.length; i++) {
