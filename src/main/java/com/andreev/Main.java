@@ -6,6 +6,7 @@ import com.andreev.writers.WriterOutO;
 import com.andreev.writers.WriterVO;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,29 +53,53 @@ public class Main {
         while (scanner.hasNextLine()) {
             int number = utils.parsStringToInt(scanner.nextLine());
             if (number == 1) {
-                System.out.println("выберите папку");
-                pathProperties.setFileKMPath(pathToFile.walkFileSystem(scanner).getAbsolutePath());
-                String[] date = pathProperties.getFileKMPath().split("\\\\");
-                properties.setDateOfManufacture(date[date.length-3] + "-" + date[date.length-2] + "-" +date[date.length-1]);
-                System.out.println("Дата производства " + properties.getDateOfManufacture() + ". Изменить дату производства?\n0. Выход\n1. Да\n2. Нет");
-                int num = utils.parsStringToInt(scanner.nextLine());
-                if (num == 1){
-                    System.out.println("введите даду производства в формате год-месяц-день");
-                    properties.setDateOfManufacture(scanner.nextLine());
-                } else if (num == 0) {
+                System.out.println("выберете действие:\n1. Ввести в оборот сегодняшним числом\n2. Ввести в оборот вчерашним числом\n3. Выбрать папку");
+                number = utils.parsStringToInt(scanner.nextLine());
+                if (number == 1){
+                    properties.setDateOfManufacture(LocalDate.now().toString());
+                    writeVODate("Gidro");
+                    writeVODate("Oasis");
                     printMenu.printMainMenu();
                     return;
-                }
-                System.out.println("выбирете фирму\n1. Гидротехнология\n2. Оазис");
-                num = utils.parsStringToInt(scanner.nextLine());
-                if (num == 0){
+                } else if (number == 2){
+                    System.out.println("вошли в 2");
+                    properties.setDateOfManufacture(LocalDate.now().minusDays(1).toString());
+                    writeVODate("Gidro");
+                    writeVODate("Oasis");
                     printMenu.printMainMenu();
                     return;
+                } else if (number == 3){
+                    System.out.println("вошли в 3");
+                    System.out.println("выберите папку");
+                    pathProperties.setFileKMPath(pathToFile.walkFileSystem(scanner).getAbsolutePath());
+                    String[] date = pathProperties.getFileKMPath().split("\\\\");
+                    properties.setDateOfManufacture(date[date.length-3] + "-" + date[date.length-2] + "-" +date[date.length-1]);
+                    System.out.println("Дата производства " + properties.getDateOfManufacture() + ". Изменить дату производства?\n0. Выход\n1. Да\n2. Нет");
+                    int num = utils.parsStringToInt(scanner.nextLine());
+                    if (num == 1){
+                        System.out.println("введите даду производства в формате год-месяц-день");
+                        properties.setDateOfManufacture(scanner.nextLine());
+                    } else if (num == 0) {
+                        printMenu.printMainMenu();
+                        return;
+                    }
+//                    System.out.println("выбирете фирму\n1. Гидротехнология\n2. Оазис");
+//                    num = utils.parsStringToInt(scanner.nextLine());
+//                    if (num == 0){
+//                        printMenu.printMainMenu();
+//                        return;
+//                    }
+//                    setupInn(num);
+                    writeSettings.writeSettings(properties, pathProperties, price);
+                    readProps(readerProperties.readPropertiesFile());
+                    writerVO.writeDoc(properties, pathProperties, price);
+                    printMenu.printDocumentType();
+                } else {
+                    System.out.println("Введена не корректная команда");
+                    printMenu.printMainMenu();
+                    break;
                 }
-                setupInn(num);
-                writeSettings.writeSettings(properties, pathProperties, price);
-                readProps(readerProperties.readPropertiesFile());
-                writerVO.writeDoc(properties, pathProperties, price);
+
             } else if (number == 2) {
                 System.out.println("Выбрана фирма: " + (properties.getInn().equals("7814075424") ? "Гидротехнология" : "Оазис"));
                 System.out.println("Дата вывода из оборота: " + properties.getDataOut());
@@ -142,8 +167,17 @@ public class Main {
             } else {
                 System.out.println("Введена не верная команда");
             }
-            printMenu.printDocumentType();
+//            printMenu.printDocumentType();
         }
+    }
+
+    private static void writeVODate(String firm) throws IOException {
+        pathProperties.setFileKMPath("R:\\PUBLIC\\Markerovka\\" + firm + "\\"
+                + properties.getDateOfManufacture().replaceAll("-", "\\" + "\\"));
+        System.out.println(pathProperties.getFileKMPath());
+        writeSettings.writeSettings(properties, pathProperties, price);
+        writerVO.writeDoc(properties, pathProperties, price);
+        return;
     }
 
     private static void changeProperties() throws IOException {

@@ -21,6 +21,13 @@ public class WriterVO implements WriterDoc{
                          Price price) throws IOException {
 
         final File fileSampleVO = new File(pathProperties.getPathInOborot());
+
+        if (pathProperties.getFileKMPath().contains("Gidro")) properties.setInn("7814075424");
+        else if (pathProperties.getFileKMPath().contains("Oasis")) properties.setInn("7814216234");
+        else {
+            System.out.println("не верное местоположение файлов");
+            return;
+        }
         final String org;
         String declNumber;
         String dateDocDecl;
@@ -28,11 +35,12 @@ public class WriterVO implements WriterDoc{
             org = "Гидро";
             declNumber = "ЕАЭС N RU Д-RU.РА05.В.47088/23";
             dateDocDecl = "17.07.2023";
-        } else {
+        } else if (properties.getInn().equals("7814216234")){
             org = "Оазис";
             declNumber = "ЕАЭС N RU Д-RU.РА02.В.13869/22";
             dateDocDecl = "28.02.2022";
         }
+        else return;
         StringBuilder temp = new StringBuilder(70);
         ArrayList<String> listFile = utils.getAllFileName(pathProperties.getFileKMPath());
         StringBuilder path = new StringBuilder(pathProperties.getPathToWriteFile())
